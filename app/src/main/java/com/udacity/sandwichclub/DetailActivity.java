@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -43,7 +46,8 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        populateUI();
+        populateUI(sandwich.getAlsoKnownAs(), sandwich.getPlaceOfOrigin(),
+                sandwich.getDescription(), sandwich.getIngredients());
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -56,7 +60,39 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
+    private void populateUI(List<String> alsoKnownAs, String placeOfOrigin, String description, List<String> ingredients) {
 
+        TextView alsoKnownAsTV = findViewById(R.id.also_known_tv);
+        TextView placeOfOriginTV = findViewById(R.id.origin_tv);
+        TextView descriptionTV = findViewById(R.id.description_tv);
+        TextView ingredientsTV = findViewById(R.id.ingredients_tv);
+
+        if (alsoKnownAs != null && alsoKnownAs.size() > 0) {
+            for (String s : alsoKnownAs) {
+                alsoKnownAsTV.append(s + "\n");
+            }
+        } else {
+            alsoKnownAsTV.setText(getString(R.string.detail_also_known_as_default));
+        }
+
+        if (placeOfOrigin != null && !placeOfOrigin.equals("")) {
+            placeOfOriginTV.setText(placeOfOrigin);
+        } else {
+            placeOfOriginTV.setText(getString(R.string.detail_place_of_origin_default));
+        }
+
+        if (description != null && !description.equals("")) {
+            descriptionTV.setText(description);
+        } else {
+            descriptionTV.setText(getString(R.string.detail_description_default));
+        }
+
+        if (ingredients != null && ingredients.size() > 0) {
+            for (String s : ingredients) {
+                ingredientsTV.append(s + "\n");
+            }
+        } else {
+            ingredientsTV.setText(getString(R.string.detail_ingredients_default));
+        }
     }
 }
