@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,10 @@ public class DetailActivity extends AppCompatActivity {
 
         populateUI(sandwich.getAlsoKnownAs(), sandwich.getPlaceOfOrigin(),
                 sandwich.getDescription(), sandwich.getIngredients());
+
+        final ProgressBar imageProgressbar = findViewById(R.id.image_progressbar);
+        imageProgressbar.setVisibility(View.VISIBLE);
+
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv, new Callback() {
@@ -68,6 +73,7 @@ public class DetailActivity extends AppCompatActivity {
                         TextView imageErrorTv = findViewById(R.id.image_error_tv);
                         imageErrorTv.setVisibility(View.INVISIBLE);
                         ingredientsIv.setVisibility(View.VISIBLE);
+                        imageProgressbar.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
@@ -78,6 +84,7 @@ public class DetailActivity extends AppCompatActivity {
                         TextView imageErrorTv = findViewById(R.id.image_error_tv);
                         imageErrorTv.setVisibility(View.VISIBLE);
                         ingredientsIv.setVisibility(View.INVISIBLE);
+                        imageProgressbar.setVisibility(View.INVISIBLE);
 
                     }
                 });

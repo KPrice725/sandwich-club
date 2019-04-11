@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--activity_main values-->
+    <dimen name="main_text_sandwich_list_name">18sp</dimen>
+    <dimen name="main_progressbar_size">42sp</dimen>
 
     <!--activity_detail portrait values-->
     <dimen name="detail_text_label_size">28sp</dimen>
