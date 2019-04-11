@@ -6,4 +6,5 @@
     <dimen name="detail_text_body_size">16sp</dimen>
     <dimen name="detail_text_label_to_body_padding">8dp</dimen>
     <dimen name="detail_text_section_padding">32dp</dimen>
+    <dimen name="scrollview_padding">8dp</dimen>
 </resources>
