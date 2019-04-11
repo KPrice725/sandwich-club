@@ -3,10 +3,13 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
@@ -17,13 +20,14 @@ public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
+    private static final String LOG_TAG = DetailActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
+        final ImageView ingredientsIv = findViewById(R.id.image_iv);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -50,7 +54,33 @@ public class DetailActivity extends AppCompatActivity {
                 sandwich.getDescription(), sandwich.getIngredients());
         Picasso.with(this)
                 .load(sandwich.getImage())
-                .into(ingredientsIv);
+                .into(ingredientsIv, new Callback() {
+                    /*
+                    Add error handling in instances where Picasso
+                    is unable to load an image, such as network issues,
+                    invalid URL, etc.
+                    */
+                    @Override
+                    public void onSuccess() {
+                        //Image successfully loaded, display the imageview and
+                        //hide the error message
+                        Log.d(LOG_TAG, "Picasso onSuccess()");
+                        TextView imageErrorTv = findViewById(R.id.image_error_tv);
+                        imageErrorTv.setVisibility(View.INVISIBLE);
+                        ingredientsIv.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        //Image failed to load, hide the imageview and display
+                        //the error message
+                        Log.d(LOG_TAG, "Picasso onError()");
+                        TextView imageErrorTv = findViewById(R.id.image_error_tv);
+                        imageErrorTv.setVisibility(View.VISIBLE);
+                        ingredientsIv.setVisibility(View.INVISIBLE);
+
+                    }
+                });
 
         setTitle(sandwich.getMainName());
     }
