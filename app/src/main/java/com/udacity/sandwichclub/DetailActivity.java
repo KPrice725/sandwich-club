@@ -68,8 +68,11 @@ public class DetailActivity extends AppCompatActivity {
         TextView ingredientsTV = findViewById(R.id.ingredients_tv);
 
         if (alsoKnownAs != null && alsoKnownAs.size() > 0) {
-            for (String s : alsoKnownAs) {
-                alsoKnownAsTV.append(s + "\n");
+            for (int i = 0; i < alsoKnownAs.size(); i++) {
+                alsoKnownAsTV.append(alsoKnownAs.get(i));
+                if (i < alsoKnownAs.size() - 1) {
+                    alsoKnownAsTV.append("\n");
+                }
             }
         } else {
             alsoKnownAsTV.setText(getString(R.string.detail_also_known_as_default));
