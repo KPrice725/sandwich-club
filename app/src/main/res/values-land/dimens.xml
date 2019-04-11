@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <!--activity_detail portrait values-->
-    <dimen name="detail_text_label_size">28sp</dimen>
-    <dimen name="detail_text_body_size">22sp</dimen>
+    <!--activity_detail landscape values-->
+    <dimen name="detail_text_label_size">22sp</dimen>
+    <dimen name="detail_text_body_size">18sp</dimen>
     <dimen name="detail_text_description_size">18sp</dimen>
     <dimen name="detail_text_label_to_body_padding">8dp</dimen>
-    <dimen name="detail_text_section_padding">32dp</dimen>
+    <dimen name="detail_text_section_padding">16dp</dimen>
     <dimen name="scrollview_padding">8dp</dimen>
+
 </resources>
