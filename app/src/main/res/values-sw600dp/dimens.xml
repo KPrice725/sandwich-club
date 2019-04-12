@@ -8,6 +8,7 @@
     <dimen name="main_progressbar_size">63sp</dimen>
 
     <!--activity_detail portrait values-->
+    <dimen name="detail_image_size">400dp</dimen>
     <dimen name="detail_text_label_size">48sp</dimen>
     <dimen name="detail_text_body_size">42sp</dimen>
     <dimen name="detail_text_description_size">36sp</dimen>
