@@ -2,6 +2,7 @@ package com.udacity.sandwichclub;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -102,9 +103,10 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI(List<String> alsoKnownAs, String placeOfOrigin, String description, List<String> ingredients) {
+    private void populateUI(@NonNull List<String> alsoKnownAs, @NonNull String placeOfOrigin,
+                            @NonNull String description, @NonNull List<String> ingredients) {
 
-        if (alsoKnownAs != null && alsoKnownAs.size() > 0) {
+        if (alsoKnownAs.size() > 0) {
             for (int i = 0; i < alsoKnownAs.size(); i++) {
                 alsoKnownAsTV.append(alsoKnownAs.get(i));
                 if (i < alsoKnownAs.size() - 1) {
@@ -115,19 +117,19 @@ public class DetailActivity extends AppCompatActivity {
             alsoKnownAsTV.setText(getString(R.string.detail_also_known_as_default));
         }
 
-        if (placeOfOrigin != null && !placeOfOrigin.equals("")) {
+        if (!placeOfOrigin.equals("")) {
             placeOfOriginTV.setText(placeOfOrigin);
         } else {
             placeOfOriginTV.setText(getString(R.string.detail_place_of_origin_default));
         }
 
-        if (description != null && !description.equals("")) {
+        if (!description.equals("")) {
             descriptionTV.setText(description);
         } else {
             descriptionTV.setText(getString(R.string.detail_description_default));
         }
 
-        if (ingredients != null && ingredients.size() > 0) {
+        if (ingredients.size() > 0) {
             for (String s : ingredients) {
                 ingredientsTV.append(s + "\n");
             }
