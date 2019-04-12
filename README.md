@@ -1,2 +1,4 @@
 # sandwich-club
 Udacity's Android Nanodegree - Project 1: Sandwich Club
+
+![](sandwich-club.gif)
