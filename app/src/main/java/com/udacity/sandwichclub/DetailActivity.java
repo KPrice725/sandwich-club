@@ -17,18 +17,27 @@ import com.udacity.sandwichclub.utils.JsonUtils;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
     private static final String LOG_TAG = DetailActivity.class.getSimpleName();
+    @BindView(R.id.image_iv) ImageView ingredientsIv;
+    @BindView(R.id.also_known_tv) TextView alsoKnownAsTV;
+    @BindView(R.id.origin_tv) TextView placeOfOriginTV;
+    @BindView(R.id.description_tv) TextView descriptionTV;
+    @BindView(R.id.ingredients_tv) TextView ingredientsTV;
+    @BindView(R.id.image_error_tv) TextView imageErrorTv;
+    @BindView(R.id.image_progressbar) ProgressBar imageProgressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-        final ImageView ingredientsIv = findViewById(R.id.image_iv);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -54,7 +63,6 @@ public class DetailActivity extends AppCompatActivity {
         populateUI(sandwich.getAlsoKnownAs(), sandwich.getPlaceOfOrigin(),
                 sandwich.getDescription(), sandwich.getIngredients());
 
-        final ProgressBar imageProgressbar = findViewById(R.id.image_progressbar);
         imageProgressbar.setVisibility(View.VISIBLE);
 
         Picasso.with(this)
@@ -70,7 +78,6 @@ public class DetailActivity extends AppCompatActivity {
                         //Image successfully loaded, display the imageview and
                         //hide the error message
                         Log.d(LOG_TAG, "Picasso onSuccess()");
-                        TextView imageErrorTv = findViewById(R.id.image_error_tv);
                         imageErrorTv.setVisibility(View.INVISIBLE);
                         ingredientsIv.setVisibility(View.VISIBLE);
                         imageProgressbar.setVisibility(View.INVISIBLE);
@@ -81,11 +88,9 @@ public class DetailActivity extends AppCompatActivity {
                         //Image failed to load, hide the imageview and display
                         //the error message
                         Log.d(LOG_TAG, "Picasso onError()");
-                        TextView imageErrorTv = findViewById(R.id.image_error_tv);
                         imageErrorTv.setVisibility(View.VISIBLE);
                         ingredientsIv.setVisibility(View.INVISIBLE);
                         imageProgressbar.setVisibility(View.INVISIBLE);
-
                     }
                 });
 
@@ -98,11 +103,6 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI(List<String> alsoKnownAs, String placeOfOrigin, String description, List<String> ingredients) {
-
-        TextView alsoKnownAsTV = findViewById(R.id.also_known_tv);
-        TextView placeOfOriginTV = findViewById(R.id.origin_tv);
-        TextView descriptionTV = findViewById(R.id.description_tv);
-        TextView ingredientsTV = findViewById(R.id.ingredients_tv);
 
         if (alsoKnownAs != null && alsoKnownAs.size() > 0) {
             for (int i = 0; i < alsoKnownAs.size(); i++) {
